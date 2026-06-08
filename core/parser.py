@@ -9,16 +9,16 @@ from env.config import BYTES_PER_FILE_LIMIT, FILE_LIMIT, SUPPORTED_SUFFIXES
 # Match code review output sections expected by the UI.
 _SECTION_PATTERN = re.compile(
     r"(?im)^[ \t]*(?:#{1,6}[ \t]*)?(?:={2,}[ \t]*)?"
-    r"(?P<label>repo pulse|top risks?|quick wins?|sharp roast|fix plan|share card)"
+    r"(?P<label>repo pulse|top risks?|quick wins?|reality check|fix plan|share card)"
     r"\b(?:[ \t]*={2,})?[ \t]*(?::|-)?[ \t]*(?P<trailing>[^\n]*)$"
 )
 
-_ORDER = ("pulse", "risks", "wins", "roast", "plan", "card")
+_ORDER = ("pulse", "risks", "wins", "reality", "plan", "card")
 _DEFAULTS = {
     "pulse": "Upload a few files or paste repository notes to begin.",
     "risks": "- No risks analyzed yet.",
     "wins": "- No quick wins analyzed yet.",
-    "roast": "No roast yet.",
+    "reality": "No reality check yet.",
     "plan": "No fix plan yet.",
     "card": "Share card will appear here.",
 }
@@ -93,8 +93,8 @@ def _canonical(label: str) -> str:
         return "risks"
     if "win" in normalized:
         return "wins"
-    if "roast" in normalized:
-        return "roast"
+    if "reality" in normalized:
+        return "reality"
     if "plan" in normalized:
         return "plan"
     return "card"
@@ -112,7 +112,7 @@ def parse_sections(response: str) -> tuple[str, str, str, str, str, str]:
             sections["pulse"],
             sections["risks"],
             sections["wins"],
-            sections["roast"],
+            sections["reality"],
             sections["plan"],
             sections["card"],
         )
@@ -130,7 +130,7 @@ def parse_sections(response: str) -> tuple[str, str, str, str, str, str]:
         sections["pulse"],
         sections["risks"],
         sections["wins"],
-        sections["roast"],
+        sections["reality"],
         sections["plan"],
         sections["card"],
     )

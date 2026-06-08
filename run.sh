@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# run.sh — local dev utility for Roast My Repo.
+# run.sh — local dev utility for Repo Reality Check.
 # Usage: ./run.sh [setup|verify|app]
 set -euo pipefail
 

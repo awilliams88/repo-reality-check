@@ -16,12 +16,12 @@ def get_theme() -> Any:
 
 
 def create_app() -> gr.Blocks:
-    """Creates and lays out the Gradio interface for Roast My Repo."""
+    """Creates and lays out the Gradio interface for Repo Reality Check."""
     with gr.Blocks(title=APP_TITLE) as demo:
         # Header makes the code review workflow immediately available.
         gr.Markdown(f"# {APP_TITLE}\n{APP_DESCRIPTION}", elem_id="rr-header")
         gr.Markdown(
-            "Upload source files, paste repo notes, or speak the review goal. Get risks, quick wins, a roast, and a fix plan.",
+            "Upload source files, paste repo notes, or speak the review goal. Get risks, quick wins, a reality check, and a fix plan.",
             elem_id="rr-kicker",
         )
 
@@ -58,7 +58,7 @@ def create_app() -> gr.Blocks:
                         label="Tone",
                     )
                 run_button = gr.Button(
-                    "Roast Repo",
+                    "Check Repo",
                     variant="primary",
                     elem_classes=["rr-run-btn"],
                 )
@@ -88,11 +88,11 @@ def create_app() -> gr.Blocks:
         with gr.Column(elem_classes=["rr-analysis-section"]):
             gr.Markdown("## Fix Desk")
             with gr.Row(elem_classes=["rr-card-grid"]):
-                roast_output = gr.Textbox(
-                    label="Sharp Roast",
+                reality_output = gr.Textbox(
+                    label="Reality Check",
                     lines=6,
                     interactive=False,
-                    elem_classes=["rr-output-card", "rr-roast-card"],
+                    elem_classes=["rr-output-card", "rr-reality-card"],
                 )
                 plan_output = gr.Textbox(
                     label="Fix Plan",
@@ -138,7 +138,7 @@ def create_app() -> gr.Blocks:
                 pulse_output,
                 risks_output,
                 wins_output,
-                roast_output,
+                reality_output,
                 plan_output,
                 card_output,
             ],
@@ -159,7 +159,7 @@ def create_app() -> gr.Blocks:
                 pulse_output,
                 risks_output,
                 wins_output,
-                roast_output,
+                reality_output,
                 plan_output,
                 card_output,
             ],

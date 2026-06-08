@@ -1,5 +1,5 @@
 ---
-title: Roast My Repo
+title: Repo Reality Check
 emoji: 🔥
 colorFrom: red
 colorTo: red
@@ -7,7 +7,7 @@ sdk: gradio
 sdk_version: 6.17.3
 app_file: app.py
 python_version: "3.12"
-short_description: A useful code-health roast that ends with fixes
+short_description: Code-health review that ends with fixes
 pinned: false
 tags:
 - build-small-hackathon
@@ -20,10 +20,10 @@ tags:
 - code-review
 ---
 
-# Roast My Repo
+# Repo Reality Check
 
-Roast My Repo turns bounded repository context into a useful code-health report:
-repo pulse, top risks, quick wins, one sharp roast, a prioritized fix plan, and
+Repo Reality Check turns bounded repository context into a useful code-health report:
+repo pulse, top risks, quick wins, one sharp reality check, a prioritized fix plan, and
 a public-safe share card.
 
 ## Model Plan
@@ -31,7 +31,7 @@ a public-safe share card.
 - Primary model: `JetBrains/Mellum2-12B-A2.5B-Instruct`
 - Fallback model metadata: `openai/gpt-oss-20b`
 - Speech input: `openai/whisper-small` local transcription for review goals
-- Fine-tuned adapter: `build-small-hackathon/roast-my-repo-review-lora`
+- Fine-tuned adapter: `build-small-hackathon/repo-reality-check-review-lora`
 - Training: Modal A10G QLoRA on app-format code review examples
 - Parameter cap: selected code model path stays under the 32B hackathon limit
 
@@ -40,9 +40,9 @@ not clone private repositories or send code to an external hosted review API.
 
 ## Hackathon Alignment
 
-| Requirement | Roast My Repo implementation |
+| Requirement | Repo Reality Check implementation |
 |---|---|
-| Gradio Space in `build-small-hackathon` | `build-small-hackathon/roast-my-repo` |
+| Gradio Space in `build-small-hackathon` | `build-small-hackathon/repo-reality-check` |
 | Track | Backyard AI |
 | Sponsor focus | JetBrains Mellum2 instruction model with OpenAI fallback metadata |
 | Merit targets | Best Agent, Sharing is Caring, Off-Brand |
@@ -52,9 +52,9 @@ not clone private repositories or send code to an external hosted review API.
 
 ## Links
 
-- GitHub Repo: https://github.com/awilliams88/roast-my-repo
-- Hugging Face Space: https://huggingface.co/spaces/build-small-hackathon/roast-my-repo
-- Fine-tuned Model: https://huggingface.co/build-small-hackathon/roast-my-repo-review-lora
+- GitHub Repo: https://github.com/awilliams88/repo-reality-check
+- Hugging Face Space: https://huggingface.co/spaces/build-small-hackathon/repo-reality-check
+- Fine-tuned Model: https://huggingface.co/build-small-hackathon/repo-reality-check-review-lora
 - Demo Video: pending final recording
 - Social Post: pending final post
 
@@ -78,7 +78,7 @@ not clone private repositories or send code to an external hosted review API.
 
 ## Limits
 
-Roast My Repo only reviews files supplied by the user, with bounded file count
+Repo Reality Check only reviews files supplied by the user, with bounded file count
 and byte limits. It should not invent line numbers, private repo state, or
 security findings beyond the provided context.
 

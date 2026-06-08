@@ -13,9 +13,9 @@ tags:
 - build-small-hackathon
 ---
 
-# Roast My Repo Review LoRA
+# Repo Reality Check Review LoRA
 
-Roast My Repo Review LoRA is a QLoRA adapter planned for the Roast My Repo
+Repo Reality Check Review LoRA is a QLoRA adapter planned for the Repo Reality Check
 Space. It teaches a compact code-review model to produce useful, shareable repo
 health reports with a dry but constructive tone.
 
@@ -24,7 +24,7 @@ health reports with a dry but constructive tone.
 - Code-health summaries for small repositories
 - Hackathon submission readiness checks
 - Architecture and verification risk review
-- Shareable public-safe roast cards
+- Shareable public-safe review cards
 
 ## Output Format
 
@@ -32,7 +32,7 @@ health reports with a dry but constructive tone.
 === REPO PULSE ===
 === TOP RISKS ===
 === QUICK WINS ===
-=== SHARP ROAST ===
+=== REALITY CHECK ===
 === FIX PLAN ===
 === SHARE CARD ===
 ```

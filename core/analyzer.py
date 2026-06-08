@@ -24,9 +24,9 @@ from core.inference import run_review_inference, transcribe_audio
 from core.parser import parse_sections, read_repo_files, stringify_content
 from env.config import MODEL_ID, PARAMETER_COUNT, PROMPT_LIMIT
 
-# Review prompt keeps the roast useful and concrete.
+# Review prompt keeps the feedback useful and concrete.
 REVIEW_PROMPT = (
-    "You are Roast My Repo, a senior code reviewer with a dry but constructive tone. "
+    "You are Repo Reality Check, a senior code reviewer with a dry but constructive tone. "
     "Prioritize bugs, risks, deployment gaps, missing tests, unclear architecture, and fast fixes. "
     "Do not invent files or line numbers. Be funny only after being useful. "
     "Never include secrets from the provided code. Keep output concise and actionable."
@@ -42,7 +42,7 @@ class RepoReview:
     pulse: str
     risks: str
     wins: str
-    roast: str
+    reality: str
     plan: str
     card: str
 
@@ -79,8 +79,8 @@ Return exactly these sections:
 === QUICK WINS ===
 - [Small changes with high leverage.]
 
-=== SHARP ROAST ===
-[One funny but accurate paragraph.]
+=== REALITY CHECK ===
+[One direct but accurate paragraph.]
 
 === FIX PLAN ===
 1. [Prioritized implementation plan.]
@@ -112,7 +112,7 @@ def review_repo(
         tone,
     )
     response, inference_log = run_review_inference(prompt)
-    pulse, risks, wins, roast, plan, card = parse_sections(response)
+    pulse, risks, wins, reality, plan, card = parse_sections(response)
     logs = "\n".join(
         [
             f"Primary model: {MODEL_ID}",
@@ -135,7 +135,7 @@ def review_repo(
         ]
         if part
     )
-    return RepoReview(context, logs, pulse, risks, wins, roast, plan, card)
+    return RepoReview(context, logs, pulse, risks, wins, reality, plan, card)
 
 
 @spaces.GPU(duration=60)
@@ -155,7 +155,7 @@ def review_repo_ui(
         review.pulse,
         review.risks,
         review.wins,
-        review.roast,
+        review.reality,
         review.plan,
         review.card,
     )

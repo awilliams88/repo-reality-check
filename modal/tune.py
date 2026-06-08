@@ -8,7 +8,7 @@ import modal
 modal_any: Any = modal
 
 # Modal app groups the remote fine-tuning job.
-app = modal_any.App("roast-my-repo-tuner")
+app = modal_any.App("repo-reality-check-tuner")
 
 # Container includes review SFT dependencies and local dataset code.
 image = (
@@ -29,10 +29,12 @@ image = (
     )
 )
 
-volume = modal_any.Volume.from_name("roast-repo-checkpoints", create_if_missing=True)
+volume = modal_any.Volume.from_name(
+    "repo-reality-check-checkpoints", create_if_missing=True
+)
 
 MODEL_ID = "JetBrains/Mellum2-12B-A2.5B-Instruct"
-ADAPTER_REPO_ID = "build-small-hackathon/roast-my-repo-review-lora"
+ADAPTER_REPO_ID = "build-small-hackathon/repo-reality-check-review-lora"
 
 
 @app.function(
@@ -43,7 +45,7 @@ ADAPTER_REPO_ID = "build-small-hackathon/roast-my-repo-review-lora"
     secrets=[modal_any.Secret.from_name("huggingface-secret")],
 )
 def train_lora(model_card_content: str, hf_token: str | None = None):
-    """Fine-tunes a compact code-review adapter on the production roast format."""
+    """Fine-tunes a compact code-review adapter on the production review format."""
     # Remote-only imports are installed inside the Modal container.
     import io
     import os as remote_os
@@ -99,7 +101,7 @@ def train_lora(model_card_content: str, hf_token: str | None = None):
         ),
     )
     args = SFTConfig(
-        output_dir="/checkpoints/roast-repo-lora",
+        output_dir="/checkpoints/repo-reality-check-lora",
         per_device_train_batch_size=1,
         gradient_accumulation_steps=4,
         warmup_steps=8,
@@ -116,8 +118,8 @@ def train_lora(model_card_content: str, hf_token: str | None = None):
     )
     trainer = SFTTrainer(model=model, train_dataset=dataset, args=args)
     trainer.train()
-    model.save_pretrained("/checkpoints/roast-repo-final")
-    tokenizer.save_pretrained("/checkpoints/roast-repo-final")
+    model.save_pretrained("/checkpoints/repo-reality-check-final")
+    tokenizer.save_pretrained("/checkpoints/repo-reality-check-final")
     volume.commit()
 
     # Publish the adapter and model card when credentials are available.
@@ -131,7 +133,7 @@ def train_lora(model_card_content: str, hf_token: str | None = None):
             path_in_repo="README.md",
             repo_id=ADAPTER_REPO_ID,
             repo_type="model",
-            commit_message="Update Roast My Repo adapter model card",
+            commit_message="Update Repo Reality Check adapter model card",
         )
     else:
         print("HF_TOKEN not set. Skipping Hub publish.")

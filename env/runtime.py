@@ -10,7 +10,9 @@ def patch_asyncio_cleanup_warning() -> None:
     """Keeps local Gradio teardown from surfacing a known invalid-fd warning."""
     # Skip patching when this Python runtime does not expose the cleanup hook.
     original_del = getattr(base_events.BaseEventLoop, "__del__", None)
-    if original_del is None or getattr(original_del, "_roast_repo_patched", False):
+    if original_del is None or getattr(
+        original_del, "_repo_reality_check_patched", False
+    ):
         return
 
     # Preserve normal cleanup while ignoring the harmless invalid-fd case.
@@ -22,7 +24,7 @@ def patch_asyncio_cleanup_warning() -> None:
                 raise
 
     # Mark the function so repeated imports stay idempotent.
-    setattr(patched_del, "_roast_repo_patched", True)
+    setattr(patched_del, "_repo_reality_check_patched", True)
     setattr(base_events.BaseEventLoop, "__del__", patched_del)
 
 

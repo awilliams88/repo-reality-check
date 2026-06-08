@@ -94,7 +94,7 @@ body, .gradio-container {
 .rr-pulse-card textarea { border: 1px solid rgba(163, 230, 53, 0.5) !important; }
 .rr-risks-card textarea { border: 1px solid rgba(248, 113, 113, 0.48) !important; }
 .rr-wins-card textarea { border: 1px solid rgba(45, 212, 191, 0.44) !important; }
-.rr-roast-card textarea { border: 1px solid rgba(251, 191, 36, 0.48) !important; }
+.rr-reality-card textarea { border: 1px solid rgba(251, 191, 36, 0.48) !important; }
 .rr-plan-card textarea { border: 1px solid rgba(96, 165, 250, 0.44) !important; }
 .rr-share-card textarea { border: 1px solid rgba(232, 121, 249, 0.42) !important; }
 .rr-example-card {
