@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# run.sh — local dev utility for Roast My Repo.
+# Usage: ./run.sh [setup|verify|app]
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
+
+PYTHON=".venv/bin/python"
+TARGET="${1:-app}"
+
+setup() {
+  if [ ! -x "$PYTHON" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv .venv
+  fi
+  echo "Installing dependencies..."
+  "$PYTHON" -m pip install --quiet --upgrade pip
+  "$PYTHON" -m pip install --quiet -r requirements.txt
+  echo "Setup complete."
+}
+
+ensure_venv() {
+  if [ ! -x "$PYTHON" ]; then
+    echo "Error: run ./run.sh setup first."
+    exit 1
+  fi
+}
+
+case "$TARGET" in
+  setup)
+    setup
+    ;;
+  verify)
+    [ ! -x "$PYTHON" ] && setup
+    echo "-> format"
+    "$PYTHON" -m ruff format app.py env/*.py core/*.py ui/*.py modal/*.py
+    echo "-> lint"
+    "$PYTHON" -m ruff check --fix app.py env/*.py core/*.py ui/*.py modal/*.py
+    echo "-> types"
+    "$PYTHON" -m pyright app.py env/*.py core/*.py ui/*.py modal/*.py
+    echo "-> compile"
+    "$PYTHON" -m compileall -q app.py env/ core/ ui/ modal/
+    echo "All checks passed."
+    ;;
+  app | run | *)
+    ensure_venv
+    "$PYTHON" app.py
+    ;;
+esac
+
+cleanup() {
+  find "$ROOT_DIR" \
+    -not -path "$ROOT_DIR/.git/*" \
+    -not -path "$ROOT_DIR/.venv/*" \
+    \( -type d -name "__pycache__" -o -type d -name ".ruff_cache" \) \
+    -exec rm -rf {} + 2>/dev/null || true
+}
+trap cleanup EXIT
