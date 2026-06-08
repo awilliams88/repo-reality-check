@@ -45,8 +45,8 @@ not clone private repositories or send code to an external hosted review API.
 |---|---|
 | Gradio Space in `build-small-hackathon` | `build-small-hackathon/repo-reality-check` |
 | Track | Backyard AI |
-| Sponsor focus | JetBrains Mellum2 instruction model with OpenAI fallback metadata |
-| Merit targets | Best Agent, Sharing is Caring, Off-Brand |
+| Sponsor focus | JetBrains Mellum2 instruction model with OpenAI-linked review context |
+| Merit targets | Best Agent, Sharing is Caring, Off-Brand, Off the Grid |
 | Multimodal input | File uploads, typed repo notes, microphone review goal |
 | Fine-tuning | Modal QLoRA adapter trained on app-format repo-review examples |
 | Demo/social links | Add final demo video and social post links after recording |
