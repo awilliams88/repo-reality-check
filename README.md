@@ -18,6 +18,7 @@ tags:
 - best-agent
 - sharing-is-caring
 - code-review
+- off-the-grid
 ---
 
 # Repo Reality Check
